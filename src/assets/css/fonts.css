@@ -1,0 +1,19 @@
+@font-face {
+    font-family: "MyriadProBlack";
+    src: url('../fonts/myriadproblack.otf')
+}
+
+@font-face {
+    font-family: "MyriadProBold";
+    src: url('../fonts/myriadprobold.ttf')
+}
+
+@font-face {
+    font-family: "MyriadProLight";
+    src: url('../fonts/myriadprolight.otf')
+}
+
+@font-face {
+    font-family: "MyriadProRegular";
+    src: url('../fonts/myriadproregular.ttf')
+}
