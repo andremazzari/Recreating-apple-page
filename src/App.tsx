@@ -1,14 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import './assets/css/fonts.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faApple } from '@fortawesome/free-brands-svg-icons';
-import {faMagnifyingGlass, faBagShopping, faChevronRight} from '@fortawesome/free-solid-svg-icons';
-import {Header, HeaderItemStyled, HeaderItemContainer, HeaderDropdownContainer, HeaderDropdownColumnStyled,
-        HighlightedProducts, HighlightedProductsItem, HighlightedProductsItemImg, HighlightedProductsItemText, HighlightedProductsItemNew,
+import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
+import {HighlightedProducts, HighlightedProductsItem, HighlightedProductsItemImg, HighlightedProductsItemText, HighlightedProductsItemNew,
         InfoLineHeader,
         MainBanner, BuyButton, LearnMore, ButtonsArea, MainBannerImg,
-        MacOptionsArea, MacOptionButton, MacOptionInfoContainer, MacOptionsInfoColorIcon} from './HeaderStyled';
-import {HeaderMenuData, HeaderMenuDataProps, submenuType, submenuColumnType} from './HeaderData'
+        MacOptionsArea, MacOptionButton, MacOptionInfoContainer, MacOptionsInfoColorIcon} from './AppStyled';
+import {Header} from './components/Header';
 
 import macbookAir from './assets/images/macbookAir.svg';
 import macbookPro from './assets/images/macbookPro.svg';
@@ -30,54 +28,7 @@ import macDesktopImage1 from './assets/images/macDesktopImage1.png';
 import macDesktopImage2 from './assets/images/macDesktopImage2.png';
 import macDesktopImage3 from './assets/images/macDesktopImage3.png';
 
-type HeaderItemProps = {
-  menuItem: HeaderMenuDataProps
-}
 
-function HeaderItem ({menuItem}: HeaderItemProps) {
-  const [dropdown, setDropdown] = useState(false); 
-
-  return (
-    <>
-      <HeaderItemContainer onMouseEnter={() => {setDropdown(true)}} onMouseLeave={() => {setDropdown(false)}}>
-        <HeaderItemStyled>{menuItem.title}</HeaderItemStyled>
-        {menuItem.submenu ? <HeaderDropdownMenu display={dropdown} submenu={menuItem.submenu}/> : ''}
-      </HeaderItemContainer>
-    </>
-  )
-}
-
-
-type HeaderDropdownMenuProps = {
-  display: boolean,
-  submenu: submenuType
-}
-
-function HeaderDropdownMenu ({display, submenu}: HeaderDropdownMenuProps) {
-  return (
-    <>
-      <HeaderDropdownContainer display={display}>
-        {submenu.map(menu_column => <HeaderDropdownMenuColumn menuColumn={menu_column}/>)}
-      </HeaderDropdownContainer>
-    </>
-  )
-}
-
-type HeaderDropdownMenuColumn = {
-  menuColumn: submenuColumnType
-}
-function HeaderDropdownMenuColumn({menuColumn}: HeaderDropdownMenuColumn) {
-  return (
-    <>
-    <HeaderDropdownColumnStyled>
-      <span>
-        {menuColumn.title}
-      </span>
-      {menuColumn.items.map(item => <span style={{fontSize:'30px'}}>{item}</span>)}
-    </HeaderDropdownColumnStyled>
-    </>
-  )
-}
 
 type flexDirection = "row" | "column";
 
@@ -168,11 +119,7 @@ function App() {
     };
   }, []);
 
-  //States
-  //Header States
-  const [headerIsHoverApple, setHeaderIsHoverApple] = useState(false);
-  const [headerIsHoverMagnifying, setHeaderIsHoverMagnifying] = useState(false);
-  const [headerIsHoverBag, setHeaderIsHoverBag] = useState(false);
+  
 
   //Mac Options Area States
   type macOptions = 'notebook' | 'desktop';
@@ -241,7 +188,7 @@ function App() {
         price: '1299'
       },
       {
-        title: 'Maac mini',
+        title: 'Mac mini',
         colors: [],
         new: false,
         chip: 'Chip M2 or M2 Pro',
@@ -260,26 +207,6 @@ function App() {
   }
 
   //Styles
-  //Header Styles
-  const headerIconColor = 'rgba(220, 220, 220, .8)';
-  const headerIconColorHover = 'rgba(255, 255, 255, .8)';
-
-  let headerIconAppleStyle = {
-    color: (headerIsHoverApple ? '#f5f5f7' : 'rgba(250, 250, 250, .8)'),
-    fontSize: '18px',
-    marginTop: '-3px'
-  }
-
-  let headerIconMagnifyingStyle = {
-    color: (headerIsHoverMagnifying ? headerIconColorHover : headerIconColor),
-    fontSize: '14px'
-  }
-
-  let headerIconBagStyle = {
-    color: (headerIsHoverBag ? headerIconColorHover : headerIconColor),
-    fontSize: '14px',
-    marginTop: '-2px'
-  }
 
   //Info Line Header Styles
   let infoLineHeadeLinkIconStyle = {
@@ -294,29 +221,7 @@ function App() {
 
   return (
     <>
-    <nav>
-      <Header>
-        <li>
-        <HeaderItemStyled>
-          <FontAwesomeIcon icon={faApple} style={headerIconAppleStyle} onMouseEnter={() => {setHeaderIsHoverApple(true)}} onMouseLeave={() => {setHeaderIsHoverApple(false)}}></FontAwesomeIcon>
-        </HeaderItemStyled>
-        </li>
-
-        {HeaderMenuData.map(menuItem => <HeaderItem menuItem={menuItem}/>)}
-
-        <li>
-        <HeaderItemStyled>
-          <FontAwesomeIcon icon={faMagnifyingGlass} style={headerIconMagnifyingStyle} onMouseEnter={() => {setHeaderIsHoverMagnifying(true)}} onMouseLeave={() => {setHeaderIsHoverMagnifying(false)}}/>
-        </HeaderItemStyled>
-        </li>
-
-        <li>
-        <HeaderItemStyled>
-        <FontAwesomeIcon icon={faBagShopping} style={headerIconBagStyle} onMouseEnter={() => {setHeaderIsHoverBag(true)}} onMouseLeave={() => {setHeaderIsHoverBag(false)}}/>
-        </HeaderItemStyled>
-        </li>
-      </Header>
-    </nav>
+    <Header/>
 
     <HighlightedProducts>
       <HighlightedProductsItem>
