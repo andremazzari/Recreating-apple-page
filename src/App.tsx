@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import './assets/css/fonts.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
@@ -98,6 +98,22 @@ function MacOptionInfo({macInfo}:MacOptionInfoProps) {
 }
 
 function App() {
+
+  //Scroll functions
+  const MacBookAirBanner = useRef<HTMLDivElement | null>(null);
+  const MacBookProBanner = useRef<HTMLDivElement | null>(null);
+
+  const handleScrollMacBookAir = () => {
+    if (MacBookAirBanner.current) {
+      MacBookAirBanner.current.scrollIntoView({ behavior:'smooth'});
+    }
+  }
+
+  const handleScrollMacBookPro = () => {
+    if (MacBookProBanner.current) {
+      MacBookProBanner.current.scrollIntoView({ behavior:'smooth'});
+    }
+  }
 
   //Effect to calculate the window width
   useEffect(() => {
@@ -224,13 +240,13 @@ function App() {
     <Header/>
 
     <HighlightedProducts>
-      <HighlightedProductsItem>
+      <HighlightedProductsItem onClick={handleScrollMacBookAir}>
         <HighlightedProductsItemImg src={macbookAir} alt="mackbookAir"/>
         <HighlightedProductsItemText>MacBook Air</HighlightedProductsItemText>
         <HighlightedProductsItemNew novo>New</HighlightedProductsItemNew>
       </HighlightedProductsItem>
 
-      <HighlightedProductsItem>
+      <HighlightedProductsItem onClick={handleScrollMacBookPro}>
         <HighlightedProductsItemImg src={macbookPro} alt="macbookPro"/>
         <HighlightedProductsItemText>MacBook Pro</HighlightedProductsItemText>
         <HighlightedProductsItemNew novo>New</HighlightedProductsItemNew>
@@ -297,7 +313,7 @@ function App() {
       </p>
     </InfoLineHeader>
 
-    <MainBanner paddingBottom='90px'>
+    <MainBanner ref={MacBookAirBanner} paddingBottom='90px'>
       <HighlightedProductsItemNew fontsize = '17' novo>New</HighlightedProductsItemNew>
       <h1>
         MacBook Air
@@ -314,7 +330,7 @@ function App() {
       <MainBannerImg src={macbookAirJpeg} ></MainBannerImg>
     </MainBanner>
 
-    <MainBanner backgroundColor='black' color='white'>
+    <MainBanner ref={MacBookProBanner} backgroundColor='black' color='white'>
       <HighlightedProductsItemNew fontsize = '17' novo>New</HighlightedProductsItemNew>
       <h1>
         MacBook Pro 13 in
