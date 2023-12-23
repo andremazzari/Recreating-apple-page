@@ -1,30 +1,11 @@
-import React, {useState, useRef, createContext, useEffect, useContext} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 
-import {HeaderStyled, HeaderItemStyled, HeaderItemContainer, HeaderDropdownContainer, HeaderDropdownColumnStyled} from './HeaderStyled';
+import {HeaderStyled, HeaderItemStyled, HeaderDropdownContainer, HeaderDropdownColumnStyled, BluredPage} from './HeaderStyled';
 import {HeaderMenuData, HeaderMenuDataProps, submenuType, submenuColumnType} from './HeaderData'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faApple } from '@fortawesome/free-brands-svg-icons';
 import {faMagnifyingGlass, faBagShopping} from '@fortawesome/free-solid-svg-icons';
-
-type HeaderItemProps = {
-    menuItem: HeaderMenuDataProps
-  }
-  
-  function HeaderItem ({menuItem}: HeaderItemProps) {
-    const [dropdown, setDropdown] = useState(false);
-    let paddindLeft = useContext(DropdownMenuPaddingContext);
-    console.log(menuItem.title + "   " + paddindLeft);
-  
-    return (
-      <>
-        <HeaderItemContainer onMouseEnter={() => {setDropdown(true)}} onMouseLeave={() => {setDropdown(false)}}>
-          <HeaderItemStyled>{menuItem.title}</HeaderItemStyled>
-          {menuItem.submenu ? <HeaderDropdownMenu display={dropdown} submenu={menuItem.submenu} paddingLeft={paddindLeft}/> : ''}
-        </HeaderItemContainer>
-      </>
-    )
-  }
   
   
   type HeaderDropdownMenuProps = {
@@ -46,6 +27,7 @@ type HeaderItemProps = {
             )
           })}
         </HeaderDropdownContainer>
+        
       </>
     )
   }
@@ -67,7 +49,6 @@ type HeaderItemProps = {
     )
   }
 
-const DropdownMenuPaddingContext = createContext<number | null>(null);
 
 export function Header () {
 
@@ -76,12 +57,17 @@ export function Header () {
     const [headerIsHoverMagnifying, setHeaderIsHoverMagnifying] = useState(false);
     const [headerIsHoverBag, setHeaderIsHoverBag] = useState(false);
 
+    const [dropdownMenuIsHover, setDropdownMenuIsHover] = useState(false);
+    const [dropdownMenuIndex, setDropdownMenuIndex] = useState<number | null>(null);
+    const [dropdownMenuContent, setDropdownMenuContent] = useState<submenuType | null | undefined>(null);
+
     const [dropdownMenuPadding, setDropdownMenuPadding] = useState<number | null>(null);
 
     //Refs
-    const firstHeaderElement = useRef<HTMLDivElement | null>(null);
+    const firstHeaderElement = useRef<HTMLLIElement | null>(null);
 
     //Effects
+    //effect to adjust the left padding of the dropdown menu
     useEffect(() => {
         const viewportResize = () => {
             if (firstHeaderElement.current) {
@@ -95,7 +81,20 @@ export function Header () {
         // Attach the event listener
         window.addEventListener('resize', viewportResize);
 
+        return () => {
+          window.removeEventListener('resize', viewportResize);
+        }
+
     }, []);
+
+    //effect to set the content of the dropdown menu
+    useEffect(() => {
+      if (dropdownMenuIndex != null && HeaderMenuData[dropdownMenuIndex].submenu !== undefined) {
+        setDropdownMenuContent(HeaderMenuData[dropdownMenuIndex].submenu);
+      } else {
+        setDropdownMenuContent(null);
+      }
+    }, [dropdownMenuIndex]);
 
     //Styles
     const headerIconColor = 'rgba(220, 220, 220, 0.8)';
@@ -119,31 +118,38 @@ export function Header () {
     }
 
     return (
-    <nav>
-        <DropdownMenuPaddingContext.Provider value={dropdownMenuPadding}>
-            <HeaderStyled>
-                <li>
-                    <HeaderItemStyled ref={firstHeaderElement}>
-                        <FontAwesomeIcon icon={faApple} style={headerIconAppleStyle} onMouseEnter={() => {setHeaderIsHoverApple(true)}} onMouseLeave={() => {setHeaderIsHoverApple(false)}}></FontAwesomeIcon>
-                    </HeaderItemStyled>
-                </li>
+    <>
+      <nav onMouseLeave={() => {setDropdownMenuIsHover(false); setDropdownMenuIndex(null)}}>
+        <HeaderStyled>
+            <li>
+                <HeaderItemStyled ref={firstHeaderElement}>
+                    <FontAwesomeIcon icon={faApple} style={headerIconAppleStyle} onMouseEnter={() => {setHeaderIsHoverApple(true);setDropdownMenuIsHover(false); setDropdownMenuIndex(null)}} onMouseLeave={() => {setHeaderIsHoverApple(false)}}></FontAwesomeIcon>
+                </HeaderItemStyled>
+            </li>
+            
+            {HeaderMenuData.map((menuItem, index) => <HeaderItemStyled onMouseEnter={() => {setDropdownMenuIsHover(true); setDropdownMenuIndex(index)}}>{menuItem.title}</HeaderItemStyled>)}
 
-                {HeaderMenuData.map(menuItem => <HeaderItem menuItem={menuItem}/>)}
+            <li>
+                <HeaderItemStyled>
+                    <FontAwesomeIcon icon={faMagnifyingGlass} style={headerIconMagnifyingStyle} onMouseEnter={() => {setHeaderIsHoverMagnifying(true);setDropdownMenuIsHover(false); setDropdownMenuIndex(null)}} onMouseLeave={() => {setHeaderIsHoverMagnifying(false)}}/>
+                </HeaderItemStyled>
+            </li>
 
-                <li>
-                    <HeaderItemStyled>
-                        <FontAwesomeIcon icon={faMagnifyingGlass} style={headerIconMagnifyingStyle} onMouseEnter={() => {setHeaderIsHoverMagnifying(true)}} onMouseLeave={() => {setHeaderIsHoverMagnifying(false)}}/>
-                    </HeaderItemStyled>
-                </li>
+            <li>
+                <HeaderItemStyled>
+                    <FontAwesomeIcon icon={faBagShopping} style={headerIconBagStyle} onMouseEnter={() => {setHeaderIsHoverBag(true);setDropdownMenuIsHover(false); setDropdownMenuIndex(null)}} onMouseLeave={() => {setHeaderIsHoverBag(false)}}/>
+                </HeaderItemStyled>
+            </li>
+        </HeaderStyled>
 
-                <li>
-                    <HeaderItemStyled>
-                        <FontAwesomeIcon icon={faBagShopping} style={headerIconBagStyle} onMouseEnter={() => {setHeaderIsHoverBag(true)}} onMouseLeave={() => {setHeaderIsHoverBag(false)}}/>
-                    </HeaderItemStyled>
-                </li>
-            </HeaderStyled>
-        </DropdownMenuPaddingContext.Provider>
+        {dropdownMenuIsHover && dropdownMenuIndex != null && dropdownMenuContent &&
+          <HeaderDropdownMenu display={dropdownMenuIsHover} submenu={dropdownMenuContent} paddingLeft={dropdownMenuPadding}/>
+        }
+      </nav>
 
-    </nav>
+      {dropdownMenuIsHover && dropdownMenuIndex != null && dropdownMenuContent &&
+      <BluredPage/>
+      }
+    </>
     )
 }

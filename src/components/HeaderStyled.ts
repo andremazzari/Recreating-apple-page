@@ -13,6 +13,7 @@ export const HeaderStyled = styled.ul`
     height: ${theme.header.height};
     width: --vw;
     background: rgba(22, 22, 23, .8);
+    position: relative;
     top: 0;
     right: 0;
     left: 0;
@@ -23,14 +24,11 @@ export const HeaderStyled = styled.ul`
     justify-content: center;
     gap: 35px;
     list-style: none;
-    z-index: 100;
+    z-index: 2;
 `;
 
-export const HeaderItemContainer = styled.li`
 
-`;
-
-export const HeaderItemStyled = styled.div`
+export const HeaderItemStyled = styled.li`
     height: ${theme.header.height};
     cursor: pointer;
     display: flex;
@@ -66,6 +64,8 @@ export const HeaderDropdownContainer = styled.div<HeaderDropdownContainerProps>`
     padding-top: 40px;
     padding-left: ${(props) => props.paddingLeft ? props.paddingLeft + "px" : '40px'};
     padding-bottom: 70px;
+
+    z-index: 2;
 `;
 
 interface HeaderDropdownColumnStyledProps {
@@ -74,8 +74,8 @@ interface HeaderDropdownColumnStyledProps {
 export const HeaderDropdownColumnStyled = styled.div<HeaderDropdownColumnStyledProps>`
     display: flex;
     flex-direction: column;
-
     margin-right: ${(props) => props.first ? '60px' : '0'};
+    cursor: pointer;
 
     .column-title {
         font-size: 13px;
@@ -90,4 +90,12 @@ export const HeaderDropdownColumnStyled = styled.div<HeaderDropdownColumnStyledP
     }
 `;
 
-
+export const BluredPage = styled.div`
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(200, 200, 200, 0.6);
+    z-index: 1;
+`
