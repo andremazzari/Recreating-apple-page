@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/Recreating-apple-page/static/css/main.e6dca820.css",
+    "main.js": "/Recreating-apple-page/static/js/main.25fdc943.js",
+    "static/media/macDesktopImage3.png": "/Recreating-apple-page/static/media/macDesktopImage3.b5ac734ccd1dd96c86ad.png",
+    "static/media/macDesktopImage1.png": "/Recreating-apple-page/static/media/macDesktopImage1.0581a143cc7cc0358ad5.png",
+    "static/media/macpro.jpeg": "/Recreating-apple-page/static/media/macpro.61642063736b7b077dc5.jpeg",
+    "static/media/myriadproblack.otf": "/Recreating-apple-page/static/media/myriadproblack.e730e1b19ca276c646dc.otf",
+    "static/media/myriadprobold.ttf": "/Recreating-apple-page/static/media/myriadprobold.ba6deb5147fa6e225f9b.ttf",
+    "static/media/myriadproregular.ttf": "/Recreating-apple-page/static/media/myriadproregular.c59859cec849233be7f8.ttf",
+    "static/media/macBookImage3.png": "/Recreating-apple-page/static/media/macBookImage3.4e7f1c38552ba9d0a2e5.png",
+    "static/media/myriadprolight.otf": "/Recreating-apple-page/static/media/myriadprolight.b0bb7658963c5d720ddd.otf",
+    "static/media/macBookImage2.png": "/Recreating-apple-page/static/media/macBookImage2.a6e2ce85a8a19ce59baa.png",
+    "static/media/macBookImage1.png": "/Recreating-apple-page/static/media/macBookImage1.f32840d8bf39040ea0e9.png",
+    "static/media/macbook.jpeg": "/Recreating-apple-page/static/media/macbook.6e4cb5bc8f129303d054.jpeg",
+    "static/media/macShop.svg": "/Recreating-apple-page/static/media/macShop.d6551e5742eaef6223f4c908a9bc68ac.svg",
+    "static/media/macbookPro.svg": "/Recreating-apple-page/static/media/macbookPro.1ade4ac6bb09c74c963b5ec153f510d6.svg",
+    "static/media/macOs.svg": "/Recreating-apple-page/static/media/macOs.2a925b7f9323693f5877136940714a2a.svg",
+    "static/media/macCompare.svg": "/Recreating-apple-page/static/media/macCompare.68db5d7c79a2f745e3e26e75bed0bb93.svg",
+    "static/media/macPro.svg": "/Recreating-apple-page/static/media/macPro.a1abb3ce1c6098d558f93045f5fd5134.svg",
+    "index.html": "/Recreating-apple-page/index.html",
+    "static/media/macbookAir.svg": "/Recreating-apple-page/static/media/macbookAir.29842919cadab85a09aed54bbf0809f2.svg",
+    "static/media/macAcessories.svg": "/Recreating-apple-page/static/media/macAcessories.91d23e1eba6115011305f4219ff1787d.svg",
+    "static/media/macDisplays.svg": "/Recreating-apple-page/static/media/macDisplays.5709c8d8937ad2a7e12a90d98131be28.svg",
+    "static/media/iMac.svg": "/Recreating-apple-page/static/media/iMac.4f9bda42995e9b0e63bec0792fc6e271.svg",
+    "static/media/macStudio.svg": "/Recreating-apple-page/static/media/macStudio.b1dc1177c7e1883cd2a19aaed3cfa5d9.svg",
+    "static/media/macMini.svg": "/Recreating-apple-page/static/media/macMini.91a98e7e13fa5468b27b89e419962edb.svg",
+    "main.e6dca820.css.map": "/Recreating-apple-page/static/css/main.e6dca820.css.map",
+    "main.25fdc943.js.map": "/Recreating-apple-page/static/js/main.25fdc943.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6dca820.css",
+    "static/js/main.25fdc943.js"
+  ]
+}
