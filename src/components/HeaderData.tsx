@@ -4,12 +4,14 @@ export type submenuType = Array<submenuColumnType>
 
 export type HeaderMenuDataProps = {
     title: string,
+    max_height: number,
     submenu?: submenuType
 }
 
 export const HeaderMenuData: HeaderMenuDataProps[]  = [
     {
         title: 'Store',
+        max_height: 387,
         submenu: [
             {
                 title: 'Shop',
@@ -46,6 +48,7 @@ export const HeaderMenuData: HeaderMenuDataProps[]  = [
     },
     {
         title: 'Mac',
+        max_height: 469,
         submenu: [
             {
                 title: 'Explore Mac',
@@ -86,6 +89,7 @@ export const HeaderMenuData: HeaderMenuDataProps[]  = [
     },
     {
         title: 'iPad',
+        max_height: 428,
         submenu: [
             {
                 title: 'Explore iPad',
@@ -123,6 +127,7 @@ export const HeaderMenuData: HeaderMenuDataProps[]  = [
     },
     {
         title: 'iPhone',
+        max_height: 387,
         submenu: [
             {
                 title: 'Explore iPhone',
@@ -162,6 +167,7 @@ export const HeaderMenuData: HeaderMenuDataProps[]  = [
     },
     {
         title: 'Watch',
+        max_height: 387,
         submenu: [
             {
                 title: 'Explore Watch',
@@ -198,10 +204,12 @@ export const HeaderMenuData: HeaderMenuDataProps[]  = [
         ]
     },
     {
-        title: 'Vision'
+        title: 'Vision',
+        max_height: 0
     },
     {
         title: 'AirPods',
+        max_height: 346,
         submenu: [
             {
                 title: 'Explore AirPods',
@@ -232,6 +240,7 @@ export const HeaderMenuData: HeaderMenuDataProps[]  = [
     },
     {
         title: 'TV & Home',
+        max_height: 366,
         submenu: [
             {
                 title: 'Explore TV & Home',
@@ -270,6 +279,7 @@ export const HeaderMenuData: HeaderMenuDataProps[]  = [
     },
     {
         title: 'Entertainment',
+        max_height: 551,
         submenu: [
             {
                 title: 'Explore Entertainment',
@@ -297,6 +307,7 @@ export const HeaderMenuData: HeaderMenuDataProps[]  = [
     },
     {
         title: 'Accessories',
+        max_height: 428,
         submenu: [
             {
                 title: 'Shop Accessories',
@@ -323,6 +334,7 @@ export const HeaderMenuData: HeaderMenuDataProps[]  = [
     },
     {
         title: 'Support',
+        max_height: 428,
         submenu: [
             {
                 title: 'Explore Support',

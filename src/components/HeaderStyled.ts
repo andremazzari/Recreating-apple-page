@@ -48,7 +48,8 @@ export const HeaderItemStyled = styled.li`
 
 interface HeaderDropdownContainerProps {
     display: boolean,
-    paddingLeft?: number | null
+    paddingLeft?: number | null,
+    height: number
 }
 
 export const HeaderDropdownContainer = styled.div<HeaderDropdownContainerProps>`
@@ -58,14 +59,20 @@ export const HeaderDropdownContainer = styled.div<HeaderDropdownContainerProps>`
     position: absolute;
     left: 0;
     right: 0;
-    display: ${(props) => props.display ? 'flex' : 'none'};
+    //display: ${(props) => props.display ? 'flex' : 'none'};
+    display: flex;
+    max-height: ${(props) => props.display ? props.height + 'px' : '0'};
     flex-direction: row;
     gap: 50px;
-    padding-top: 40px;
+    padding-top: ${(props) => props.display ? '40px' : '0'};
     padding-left: ${(props) => props.paddingLeft ? props.paddingLeft + "px" : '40px'};
-    padding-bottom: 70px;
+    padding-bottom: ${(props) => props.display ? '70px' : '0'};
 
     z-index: 2;
+
+    //sliding effect
+    transition: max-height ${(props) => props.display ? '0.5s' : '0s'} ease-out;
+    overflow: hidden;
 `;
 
 interface HeaderDropdownColumnStyledProps {

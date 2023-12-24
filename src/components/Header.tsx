@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect} from 'react';
 
 import {HeaderStyled, HeaderItemStyled, HeaderDropdownContainer, HeaderDropdownColumnStyled, BluredPage} from './HeaderStyled';
-import {HeaderMenuData, HeaderMenuDataProps, submenuType, submenuColumnType} from './HeaderData'
+import {HeaderMenuData, submenuType, submenuColumnType} from './HeaderData'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faApple } from '@fortawesome/free-brands-svg-icons';
@@ -10,24 +10,32 @@ import {faMagnifyingGlass, faBagShopping} from '@fortawesome/free-solid-svg-icon
   
   type HeaderDropdownMenuProps = {
     display: boolean,
-    submenu: submenuType,
-    paddingLeft: number | null
+    submenu: submenuType | null | undefined,
+    paddingLeft: number | null,
+    dropdownMenuHeight: number
   }
   
-  function HeaderDropdownMenu ({display, submenu, paddingLeft}: HeaderDropdownMenuProps) {
+  function HeaderDropdownMenu ({display, submenu, paddingLeft, dropdownMenuHeight}: HeaderDropdownMenuProps) {
     let first;
+    // const [dropdownMenuHeight2, setDropdownMenuHeight] = useState(0);
+    // const dropdownMenuElement = useRef<HTMLDivElement | null>(null);
+
+    // useEffect(() => {
+    //   if (dropdownMenuElement.current) {
+    //     setDropdownMenuHeight(dropdownMenuElement.current.scrollHeight);
+    //   }
+    // })
     return (
       <>
-        <HeaderDropdownContainer display={display} paddingLeft={paddingLeft}>
+        <HeaderDropdownContainer display={display} height={dropdownMenuHeight} paddingLeft={paddingLeft}>
           
-          {submenu.map((menu_column, index) => {
+          {submenu != null && submenu.map((menu_column, index) => {
             index == 0 ? first = true : first = false;
             return (
               <HeaderDropdownMenuColumn menuColumn={menu_column} first={first}/>
             )
           })}
         </HeaderDropdownContainer>
-        
       </>
     )
   }
@@ -51,7 +59,6 @@ import {faMagnifyingGlass, faBagShopping} from '@fortawesome/free-solid-svg-icon
 
 
 export function Header () {
-
     //States
     const [headerIsHoverApple, setHeaderIsHoverApple] = useState(false);
     const [headerIsHoverMagnifying, setHeaderIsHoverMagnifying] = useState(false);
@@ -60,6 +67,7 @@ export function Header () {
     const [dropdownMenuIsHover, setDropdownMenuIsHover] = useState(false);
     const [dropdownMenuIndex, setDropdownMenuIndex] = useState<number | null>(null);
     const [dropdownMenuContent, setDropdownMenuContent] = useState<submenuType | null | undefined>(null);
+    const [dropdownMenuHeight, setDropdownMenuHeight] = useState<number>(0);
 
     const [dropdownMenuPadding, setDropdownMenuPadding] = useState<number | null>(null);
 
@@ -91,7 +99,9 @@ export function Header () {
     useEffect(() => {
       if (dropdownMenuIndex != null && HeaderMenuData[dropdownMenuIndex].submenu !== undefined) {
         setDropdownMenuContent(HeaderMenuData[dropdownMenuIndex].submenu);
+        setDropdownMenuHeight(HeaderMenuData[dropdownMenuIndex].max_height);
       } else {
+        setDropdownMenuIsHover(false);
         setDropdownMenuContent(null);
       }
     }, [dropdownMenuIndex]);
@@ -141,12 +151,11 @@ export function Header () {
                 </HeaderItemStyled>
             </li>
         </HeaderStyled>
+        
+        <HeaderDropdownMenu display={dropdownMenuIsHover} dropdownMenuHeight={dropdownMenuHeight} submenu={dropdownMenuContent} paddingLeft={dropdownMenuPadding}/> 
 
-        {dropdownMenuIsHover && dropdownMenuIndex != null && dropdownMenuContent &&
-          <HeaderDropdownMenu display={dropdownMenuIsHover} submenu={dropdownMenuContent} paddingLeft={dropdownMenuPadding}/>
-        }
       </nav>
-
+      
       {dropdownMenuIsHover && dropdownMenuIndex != null && dropdownMenuContent &&
       <BluredPage/>
       }
