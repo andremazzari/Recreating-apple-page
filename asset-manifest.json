@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Recreating-apple-page/static/css/main.e6dca820.css",
-    "main.js": "/Recreating-apple-page/static/js/main.25fdc943.js",
+    "main.js": "/Recreating-apple-page/static/js/main.c7fb4186.js",
     "static/media/macDesktopImage3.png": "/Recreating-apple-page/static/media/macDesktopImage3.b5ac734ccd1dd96c86ad.png",
     "static/media/macDesktopImage1.png": "/Recreating-apple-page/static/media/macDesktopImage1.0581a143cc7cc0358ad5.png",
     "static/media/macpro.jpeg": "/Recreating-apple-page/static/media/macpro.61642063736b7b077dc5.jpeg",
@@ -26,10 +26,10 @@
     "static/media/macStudio.svg": "/Recreating-apple-page/static/media/macStudio.b1dc1177c7e1883cd2a19aaed3cfa5d9.svg",
     "static/media/macMini.svg": "/Recreating-apple-page/static/media/macMini.91a98e7e13fa5468b27b89e419962edb.svg",
     "main.e6dca820.css.map": "/Recreating-apple-page/static/css/main.e6dca820.css.map",
-    "main.25fdc943.js.map": "/Recreating-apple-page/static/js/main.25fdc943.js.map"
+    "main.c7fb4186.js.map": "/Recreating-apple-page/static/js/main.c7fb4186.js.map"
   },
   "entrypoints": [
     "static/css/main.e6dca820.css",
-    "static/js/main.25fdc943.js"
+    "static/js/main.c7fb4186.js"
   ]
 }
